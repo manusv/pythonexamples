@@ -1,0 +1,36 @@
+---
+      - name: Create consul directory
+        file:
+          state: directory
+          dest: '{{ consul.dir }}'
+          owner: root
+          group: root
+
+      - name: Get consul
+        get_url:
+          url: '{{ consul.url }}'
+          dest: '{{ consul.dir}}'
+
+      - name: Extract consul
+        unarchive:
+          src:  '{{consul.dir}}/{{ consul_archive }}'
+          dest: '{{consul.dir}}'
+          remote_src: True
+
+      - name: Link consul
+        file:
+          state: link
+          src: '{{ consul.dir }}/consul'
+          dest: /usr/local/bin/consul
+
+      - name: Copy systemd conf
+        template:
+          src: consul.service.j2
+          dest: /etc/systemd/system/consul.service
+
+      - name: Start consul service
+        service:
+          name: consul
+          state: started
+        become: yes
+        become_method: sudo
