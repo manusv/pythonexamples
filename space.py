@@ -32,3 +32,6 @@ print(response.content)
 response = requests.get("http://api.open-notify.org/iss-pass.json?lat=40.71&lon=-74")
 print(response.content)
 type(response.content)
+
+
+
