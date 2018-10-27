@@ -43,3 +43,4 @@ data = response.json()
 # 9 people are currently in space.
 print(data["number"])
 print(data)
+print(type(data))
