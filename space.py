@@ -23,7 +23,7 @@ print(response.status_code)
 parameters = {"lat": 40.71, "lon": -74}
 
 # Make a get request with the parameters.
-response = requests.get("http://api.open-notify.org/iss-pass.json", params=parameters)
+response = requests.get("http://api.open-notify.org/iss-pass.json", params=parameters) 
 
 # Print the content of the response (the data the server returned)
 print(response.content)
@@ -35,3 +35,11 @@ type(response.content)
 
 
 
+# Get the response from the API endpoint.
+import requests
+response = requests.get("http://api.open-notify.org/astros.json")
+data = response.json()
+
+# 9 people are currently in space.
+print(data["number"])
+print(data)
